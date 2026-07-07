@@ -84,14 +84,9 @@ rest of the agent is unaffected.
 
 ### Why are safety overrides code-enforced rather than trusted to the LLM?
 
-LLMs can be confidently wrong. The assignment explicitly asks for reliability
-("manual review for uncertain cases") — so the three hardest rules (global
-amount threshold, low confidence, duplicate detection) are enforced in plain
-Python after the LLM responds, not just instructed via the prompt. The LLM
-can still recommend Manual Review on its own judgement for other ambiguous
-cases (conflicting info, missing receipt context, suite upgrades needing
-sign-off, etc.) — the overrides are a backstop, not a replacement for its
-reasoning.
+LLMs can be confidently wrong. For business workflows like expense reimbursement, reliability is more important than trusting every model response. That's why the three highest priority rules, global amount threshold, low confidence, and duplicate detection, are enforced in Python after the LLM responds rather than relying only on prompting.
+
+The LLM can still recommend Manual Review for ambiguous cases such as conflicting information, missing receipt context, or approvals requiring additional sign-off. The rule-based overrides act as a safety layer, not a replacement for the model's reasoning.
 
 ---
 
@@ -157,7 +152,7 @@ cannot pass through silently:
   improve next."
 - No persistent database — claim history is a static JSON file, not a live
   store of past decisions.
-- No authentication/authorization layer (out of scope per assignment).
+- No authentication/authorization layer (kept out of scope for this prototype).
 
 **What I'd improve with more time**
 - Swap policy_lookup for embedding-based retrieval to scale to a full real
@@ -166,8 +161,7 @@ cannot pass through silently:
   used to refine prompt/tool logic over time.
 - Add an evaluation harness that scores agent decisions against a larger
   labeled claim set automatically (precision/recall on each decision class).
-- Add MCP-based tool exposure so the same tools could be reused by other
-  internal agents (noted as optional in the assignment).
+- Add MCP-based tool exposure so the same tools can be reused by other internal AI agents.
 
 ---
 
