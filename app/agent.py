@@ -1,19 +1,17 @@
 """
-Travel Reimbursement Approval Agent — core orchestration.
+Travel Reimbursement Approval Agent - Core orchestration.
 
-Design choice: direct LLM function-calling loop (Groq's OpenAI-compatible
-API) rather than a full agent framework (LangChain/CrewAI/AutoGen). For a
-single-agent, single-turn-per-claim workflow like this, a framework adds
-indirection without adding capability — a transparent tool-calling loop is
-easier to audit, debug, and explain to a panel, and is exactly what the
-assignment's "avoidable over-engineering removed" criterion rewards.
+This project uses a direct LLM function-calling loop with Groq's
+OpenAI-compatible API instead of a larger orchestration framework.
+For a single-agent, single-turn workflow, this approach keeps the
+architecture lightweight, transparent, and easier to debug.
 
-Reliability note: the LLM proposes a decision + confidence, but the FINAL
-decision is code-enforced. The LLM cannot talk itself into auto-approving
-or auto-rejecting a claim that hits a hard policy trigger (duplicate flag,
-global manual-review threshold, low self-reported confidence). This is the
-"manual review handling" requirement implemented as a guardrail, not a
-suggestion.
+The LLM is responsible for reasoning and tool selection, while
+critical business rules are enforced in application logic. Claims
+that exceed approval thresholds, have low confidence, or are flagged
+as duplicates are automatically routed to Manual Review. This hybrid
+approach combines the flexibility of LLM reasoning with deterministic
+business rule enforcement.
 """
 import json
 import os
