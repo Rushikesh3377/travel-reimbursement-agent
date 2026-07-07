@@ -69,7 +69,7 @@ function showPreview(idx) {
 async function evaluateClaim() {
   const idx = document.getElementById("claimSelect").value;
   const claim = claims[idx];
-  document.getElementById("result").innerHTML = "Evaluating... (agent is calling tools and reasoning)";
+  document.getElementById("result").innerHTML = "Processing — checking policy, limits, and history...";
 
   try {
     const res = await fetch(`${API_BASE}/evaluate-claim`, {
@@ -96,7 +96,7 @@ function renderResult(data) {
     <div class="row"><span class="label">Policy Reference</span><span>${d.policy_reference}</span></div>
     <div class="row"><span class="label">Missing Documents</span><span>${d.missing_documents.join(", ") || "None"}</span></div>
     <p style="color:var(--muted);font-size:13px;margin-top:10px;">${d.explanation}</p>
-    <h3 style="font-size:14px;color:var(--accent);margin-top:20px;">Audit Trail (tools called)</h3>
+    <h3 style="font-size:14px;color:var(--accent);margin-top:20px;">Audit Trail</h3>
   `;
   data.audit_trail.forEach(t => {
     html += `<div class="tool-call">
