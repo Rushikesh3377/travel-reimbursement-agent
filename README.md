@@ -71,10 +71,7 @@ transparent function-calling loop against Groq's OpenAI-compatible API is:
 - Easier to **debug and explain** in an interview
 - Fewer moving parts that could fail or behave unpredictably
 
-This was a deliberate trade-off in line with the assignment's call to remove
-"avoidable over-engineering." A framework would be justified if this grew
-into a multi-agent system (e.g., a separate agent negotiating with a finance
-system), but isn't needed here.
+This was a deliberate design decision to keep the architecture simple, maintainable, and easy to reason about. A framework would be justified if this evolved into a multi-agent system (for example, a separate agent interacting with finance or ERP systems), but it isn't necessary for this workflow.
 
 ### Why is policy grounding not a vector database?
 
