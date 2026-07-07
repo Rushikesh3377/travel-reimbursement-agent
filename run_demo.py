@@ -1,12 +1,3 @@
-"""
-Runs the agent against all sample claims in data/claims.json and saves
-results to outputs/ — this is what generates the 'sample outputs' deliverable
-and what you'd narrate over in the demo video.
-
-Usage:
-    export GROQ_API_KEY=your_key_here
-    python run_demo.py
-"""
 import json
 import sys
 from pathlib import Path
