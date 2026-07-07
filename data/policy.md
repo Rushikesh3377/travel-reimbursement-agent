@@ -1,5 +1,5 @@
 # Corporate Travel & Expense Reimbursement Policy (Mock)
-Version 1.0 — For demo/assignment purposes only. No real company data.
+Version 1.0 — Mock policy for demo purposes only. No real company data.
 
 ## Section 1: General Eligibility
 1.1 Reimbursement applies only to pre-approved business travel (client visits, conferences, training, inter-office travel).
