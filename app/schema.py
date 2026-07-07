@@ -1,9 +1,3 @@
-"""
-Structured output schema for the Travel Reimbursement Approval Agent.
-Every decision returned by the agent is validated against this schema
-before being sent back to the caller — this is what guarantees the
-'Structured output' and 'Reliability' requirements in the assignment.
-"""
 from pydantic import BaseModel, Field, field_validator
 from typing import List, Literal
 
