@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Travel Reimbursement Approval Agent — Demo</title>
+<style>
+  :root { --bg:#0b0e14; --panel:#131722; --accent:#6ee7ff; --text:#e6edf3; --muted:#8b96a5; --good:#3ddc97; --warn:#ffb84d; --bad:#ff5c7c; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); padding: 32px; overflow-x: hidden; }
+  h1 { font-size: 20px; color: var(--accent); margin-bottom: 4px; }
+  .sub { color: var(--muted); margin-bottom: 24px; font-size: 13px; }
+  .layout { display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 20px; max-width: 100%; }
+  .panel { background: var(--panel); border: 1px solid #1f2530; border-radius: 10px; padding: 18px; min-width: 0; overflow-wrap: break-word; }
+  select, button { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #2a3140; background:#1a1f2b; color:var(--text); font-size:14px; }
+  button { background: var(--accent); color: #001318; font-weight: 600; cursor: pointer; margin-top: 12px; border:none; }
+  button:hover { opacity: 0.9; }
+  pre { background:#0e1118; padding:12px; border-radius:8px; overflow-x:auto; overflow-wrap: break-word; white-space: pre-wrap; word-break: break-word; font-size:12px; color:#a9c3d8; max-width: 100%; }
+  .badge { display:inline-block; padding:4px 12px; border-radius:20px; font-weight:600; font-size:13px; }
+  .Approved { background: rgba(61,220,151,.15); color: var(--good); }
+  .Partially-Approved { background: rgba(255,184,77,.15); color: var(--warn); }
+  .Rejected { background: rgba(255,92,124,.15); color: var(--bad); }
+  .Manual-Review { background: rgba(110,231,255,.15); color: var(--accent); }
+  .row { display:flex; margin: 8px 0; font-size: 14px; gap: 16px; }
+  .row .label { color: var(--muted); flex: 0 0 160px; }
+  .row span:last-child { text-align: left; word-break: break-word; min-width: 0; color: var(--text); font-weight: 500; }
+  .tool-call .name { color: var(--accent); font-weight: 600; font-size: 13px; }
+</style>
+</head>
+<body>
+  <h1>🧳 Travel Reimbursement Approval Agent</h1>
+  <div class="sub">GenAI Agentic Demo — claim evaluation with tool-grounded decisions</div>
+
+  <div class="layout">
+    <div class="panel">
+      <label style="font-size:13px;color:var(--muted)">Select a sample claim</label>
+      <select id="claimSelect"></select>
+      <button onclick="evaluateClaim()">Evaluate Claim</button>
+      <div id="claimPreview" style="margin-top:16px;"></div>
+    </div>
+
+    <div class="panel">
+      <div id="result">Select a claim and click Evaluate to see the agent's decision and audit trail.</div>
+    </div>
+  </div>
+
+<script>
+const API_BASE = "http://localhost:8000";
+let claims = [];
+
+async function loadClaims() {
+  const res = await fetch("./data/claims.json");
+  claims = await res.json();
+  const sel = document.getElementById("claimSelect");
+  claims.forEach((c, i) => {
+    const opt = document.createElement("option");
+    opt.value = i;
+    opt.textContent = `${c.claim_id} — ${c.category} — ₹${c.amount} (${c.city})`;
+    sel.appendChild(opt);
+  });
+  showPreview(0);
+  sel.addEventListener("change", e => showPreview(e.target.value));
+}
+
+function showPreview(idx) {
+  const c = claims[idx];
+  document.getElementById("claimPreview").innerHTML = `<pre>${JSON.stringify(c, null, 2)}</pre>`;
+}
+
+async function evaluateClaim() {
+  const idx = document.getElementById("claimSelect").value;
+  const claim = claims[idx];
+  document.getElementById("result").innerHTML = "Evaluating... (agent is calling tools and reasoning)";
+
+  try {
+    const res = await fetch(`${API_BASE}/evaluate-claim`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(claim),
+    });
+    const data = await res.json();
+    renderResult(data);
+  } catch (e) {
+    document.getElementById("result").innerHTML = `<span style="color:var(--bad)">Error: ${e.message}. Is the FastAPI server running on :8000?</span>`;
+  }
+}
+
+function renderResult(data) {
+  const d = data.decision;
+  const badgeClass = d.decision.replace(/ /g, "-");
+  let html = `
+    <span class="badge ${badgeClass}">${d.decision}</span>
+    <div class="row"><span class="label">Claim ID</span><span>${d.claim_id}</span></div>
+    <div class="row"><span class="label">Approved Amount</span><span>₹${d.approved_amount}</span></div>
+    <div class="row"><span class="label">Deducted Amount</span><span>₹${d.deducted_amount}</span></div>
+    <div class="row"><span class="label">Confidence</span><span>${(d.confidence*100).toFixed(0)}%</span></div>
+    <div class="row"><span class="label">Policy Reference</span><span>${d.policy_reference}</span></div>
+    <div class="row"><span class="label">Missing Documents</span><span>${d.missing_documents.join(", ") || "None"}</span></div>
+    <p style="color:var(--muted);font-size:13px;margin-top:10px;">${d.explanation}</p>
+    <h3 style="font-size:14px;color:var(--accent);margin-top:20px;">Audit Trail (tools called)</h3>
+  `;
+  data.audit_trail.forEach(t => {
+    html += `<div class="tool-call">
+      <div class="name">${t.tool}</div>
+      <pre>${JSON.stringify(t.result, null, 2)}</pre>
+    </div>`;
+  });
+  document.getElementById("result").innerHTML = html;
+}
+
+loadClaims();
+</script>
+</body>
+</html>

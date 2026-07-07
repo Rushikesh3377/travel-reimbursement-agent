@@ -1,0 +1,36 @@
+{
+  "currency": "INR",
+  "city_tiers": {
+    "Tier1": ["Mumbai", "Bengaluru", "Delhi", "Pune", "Hyderabad", "Chennai"],
+    "Tier2": ["Jaipur", "Lucknow", "Chandigarh", "Ahmedabad", "Kochi"],
+    "Tier3": ["Nashik", "Indore", "Bhopal", "Coimbatore"]
+  },
+  "limits": {
+    "Meals": {
+      "Tier1": 1800,
+      "Tier2": 1400,
+      "Tier3": 1000,
+      "unit": "per_day"
+    },
+    "Lodging": {
+      "Tier1": 6000,
+      "Tier2": 4500,
+      "Tier3": 3200,
+      "unit": "per_night"
+    },
+    "LocalTransport": {
+      "Tier1": 800,
+      "Tier2": 600,
+      "Tier3": 450,
+      "unit": "per_day"
+    },
+    "Flight": {
+      "Tier1": 25000,
+      "Tier2": 20000,
+      "Tier3": 18000,
+      "unit": "per_trip"
+    }
+  },
+  "global_manual_review_threshold": 25000,
+  "receipt_required_above": 500
+}

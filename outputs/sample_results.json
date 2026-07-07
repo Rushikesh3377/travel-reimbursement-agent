@@ -1,0 +1,508 @@
+[
+  {
+    "claim": {
+      "claim_id": "CLM-1001",
+      "employee_id": "EMP-204",
+      "employee_name": "A. Sharma",
+      "category": "Meals",
+      "city": "Pune",
+      "date": "2026-06-12",
+      "amount": 1500,
+      "vendor": "The Spice Route Restaurant",
+      "description": "Dinner with client during Pune site visit",
+      "receipt_attached": true,
+      "receipt_date": "2026-06-12",
+      "submitted_date": "2026-06-15"
+    },
+    "decision": {
+      "claim_id": "CLM-1001",
+      "decision": "Approved",
+      "approved_amount": 1500.0,
+      "deducted_amount": 0.0,
+      "missing_documents": [],
+      "policy_reference": "Section 2: Per Diem & Meal Allowance",
+      "confidence": 1.0,
+      "explanation": "The claim is within the per-diem limit for meals in Pune and has a valid receipt attached. The claim was submitted on time and is not a duplicate submission.",
+      "tools_used": [
+        "policy_lookup",
+        "limit_checker",
+        "receipt_validator",
+        "duplicate_detector"
+      ]
+    },
+    "audit_trail": [
+      {
+        "tool": "policy_lookup",
+        "args": {
+          "query": "Meals"
+        },
+        "result": {
+          "query": "Meals",
+          "matched_sections": [
+            "Section 2: Per Diem & Meal Allowance",
+            "Section 1: General Eligibility"
+          ],
+          "context": "## Section 2: Per Diem & Meal Allowance\n2.1 Meal per-diem limits by city tier (see limits.json for exact values):\n    - Tier 1 (Metro: Mumbai, Bengaluru, Delhi, Pune): higher allowance\n    - Tier 2 (other state capitals): medium allowance\n    - Tier 3 (other cities): lower allowance\n2.2 Alcohol is never reimbursable under meal per-diem, regardless of city tier.\n2.3 Amounts exceeding the per-diem limit are Partially Approved \u2014 the excess is deducted, not auto-rejected, unless receipts are also missing.\n\n## Section 1: General Eligibility\n1.1 Reimbursement applies only to pre-approved business travel (client visits, conferences, training, inter-office travel).\n1.2 Personal travel, leisure add-ons, or travel for dependents is never reimbursable.\n1.3 Claims must be submitted within 30 days of the expense date. Claims submitted later are routed to Manual Review."
+        }
+      },
+      {
+        "tool": "limit_checker",
+        "args": {
+          "amount": 1500,
+          "category": "Meals",
+          "city": "Pune"
+        },
+        "result": {
+          "category": "Meals",
+          "city": "Pune",
+          "city_tier": "Tier1",
+          "limit": 1800,
+          "claimed_amount": 1500,
+          "within_limit": true,
+          "excess_amount": 0,
+          "global_manual_review_threshold": 25000,
+          "exceeds_global_manual_review_threshold": false
+        }
+      },
+      {
+        "tool": "receipt_validator",
+        "args": {
+          "amount": 1500,
+          "claim_date": "2026-06-12",
+          "receipt_attached": true,
+          "receipt_date": "2026-06-12",
+          "submitted_date": "2026-06-15"
+        },
+        "result": {
+          "receipt_required": true,
+          "receipt_attached": true,
+          "date_mismatch": false,
+          "late_submission": false,
+          "issues": [],
+          "passed": true
+        }
+      },
+      {
+        "tool": "duplicate_detector",
+        "args": {
+          "amount": 1500,
+          "date": "2026-06-12",
+          "employee_id": "EMP-204",
+          "vendor": "The Spice Route Restaurant",
+          "claim_id": "CLM-1001"
+        },
+        "result": {
+          "is_likely_duplicate": false,
+          "matched_claims": [],
+          "checked_against_history_size": 3
+        }
+      }
+    ]
+  },
+  {
+    "claim": {
+      "claim_id": "CLM-1002",
+      "employee_id": "EMP-118",
+      "employee_name": "R. Iyer",
+      "category": "Meals",
+      "city": "Pune",
+      "date": "2026-06-10",
+      "amount": 2600,
+      "vendor": "Hotel Grand Court Restaurant",
+      "description": "Team dinner including drinks during conference",
+      "receipt_attached": true,
+      "receipt_date": "2026-06-10",
+      "submitted_date": "2026-06-11"
+    },
+    "decision": {
+      "claim_id": "CLM-1002",
+      "decision": "Partially Approved",
+      "approved_amount": 1800.0,
+      "deducted_amount": 800.0,
+      "missing_documents": [],
+      "policy_reference": "Section 2: Per Diem & Meal Allowance",
+      "confidence": 0.9,
+      "explanation": "The claim is partially approved because the amount exceeds the per-diem limit for meals in Pune. The excess amount is deducted, as per policy Section 2.3.",
+      "tools_used": [
+        "policy_lookup",
+        "limit_checker",
+        "receipt_validator",
+        "duplicate_detector"
+      ]
+    },
+    "audit_trail": [
+      {
+        "tool": "policy_lookup",
+        "args": {
+          "query": "Meals"
+        },
+        "result": {
+          "query": "Meals",
+          "matched_sections": [
+            "Section 2: Per Diem & Meal Allowance",
+            "Section 1: General Eligibility"
+          ],
+          "context": "## Section 2: Per Diem & Meal Allowance\n2.1 Meal per-diem limits by city tier (see limits.json for exact values):\n    - Tier 1 (Metro: Mumbai, Bengaluru, Delhi, Pune): higher allowance\n    - Tier 2 (other state capitals): medium allowance\n    - Tier 3 (other cities): lower allowance\n2.2 Alcohol is never reimbursable under meal per-diem, regardless of city tier.\n2.3 Amounts exceeding the per-diem limit are Partially Approved \u2014 the excess is deducted, not auto-rejected, unless receipts are also missing.\n\n## Section 1: General Eligibility\n1.1 Reimbursement applies only to pre-approved business travel (client visits, conferences, training, inter-office travel).\n1.2 Personal travel, leisure add-ons, or travel for dependents is never reimbursable.\n1.3 Claims must be submitted within 30 days of the expense date. Claims submitted later are routed to Manual Review."
+        }
+      },
+      {
+        "tool": "limit_checker",
+        "args": {
+          "amount": 2600,
+          "category": "Meals",
+          "city": "Pune"
+        },
+        "result": {
+          "category": "Meals",
+          "city": "Pune",
+          "city_tier": "Tier1",
+          "limit": 1800,
+          "claimed_amount": 2600,
+          "within_limit": false,
+          "excess_amount": 800,
+          "global_manual_review_threshold": 25000,
+          "exceeds_global_manual_review_threshold": false
+        }
+      },
+      {
+        "tool": "receipt_validator",
+        "args": {
+          "amount": 2600,
+          "claim_date": "2026-06-10",
+          "receipt_attached": true,
+          "receipt_date": "2026-06-10",
+          "submitted_date": "2026-06-11"
+        },
+        "result": {
+          "receipt_required": true,
+          "receipt_attached": true,
+          "date_mismatch": false,
+          "late_submission": false,
+          "issues": [],
+          "passed": true
+        }
+      },
+      {
+        "tool": "duplicate_detector",
+        "args": {
+          "amount": 2600,
+          "date": "2026-06-10",
+          "employee_id": "EMP-118",
+          "vendor": "Hotel Grand Court Restaurant",
+          "claim_id": "CLM-1002"
+        },
+        "result": {
+          "is_likely_duplicate": false,
+          "matched_claims": [],
+          "checked_against_history_size": 3
+        }
+      }
+    ]
+  },
+  {
+    "claim": {
+      "claim_id": "CLM-1003",
+      "employee_id": "EMP-077",
+      "employee_name": "K. Verma",
+      "category": "Lodging",
+      "city": "Nashik",
+      "date": "2026-06-05",
+      "amount": 4100,
+      "vendor": "City Stay Inn",
+      "description": "One night stay for vendor meeting",
+      "receipt_attached": false,
+      "receipt_date": null,
+      "submitted_date": "2026-06-20"
+    },
+    "decision": {
+      "claim_id": "CLM-1003",
+      "decision": "Rejected",
+      "approved_amount": 0.0,
+      "deducted_amount": 4100.0,
+      "missing_documents": [
+        "receipt"
+      ],
+      "policy_reference": "Section 3: Lodging / Hotel",
+      "confidence": 0.9,
+      "explanation": "The claim is rejected due to the lack of a required receipt and exceeding the nightly cap for the city. The claimed amount of 4100 is above the limit of 3200 for Nashik, a Tier 3 city.",
+      "tools_used": [
+        "policy_lookup",
+        "limit_checker",
+        "receipt_validator",
+        "duplicate_detector"
+      ]
+    },
+    "audit_trail": [
+      {
+        "tool": "policy_lookup",
+        "args": {
+          "query": "Lodging"
+        },
+        "result": {
+          "query": "Lodging",
+          "matched_sections": [
+            "Section 3: Lodging / Hotel",
+            "Section 8: Currency & Rounding"
+          ],
+          "context": "## Section 3: Lodging / Hotel\n3.1 Hotel stays must not exceed the nightly cap for the relevant city tier.\n3.2 Only standard/business category rooms are covered. Suite or premium upgrades require Manual Review with written justification.\n3.3 Lodging claims without an itemized hotel invoice are Rejected unless the amount is under \u20b91,500, in which case Manual Review may apply.\n\n## Section 8: Currency & Rounding\n8.1 All amounts in this policy and in claims are in INR (\u20b9) unless otherwise stated.\n8.2 Final approved amounts are rounded down to the nearest whole rupee."
+        }
+      },
+      {
+        "tool": "limit_checker",
+        "args": {
+          "amount": 4100,
+          "category": "Lodging",
+          "city": "Nashik"
+        },
+        "result": {
+          "category": "Lodging",
+          "city": "Nashik",
+          "city_tier": "Tier3",
+          "limit": 3200,
+          "claimed_amount": 4100,
+          "within_limit": false,
+          "excess_amount": 900,
+          "global_manual_review_threshold": 25000,
+          "exceeds_global_manual_review_threshold": false
+        }
+      },
+      {
+        "tool": "receipt_validator",
+        "args": {
+          "amount": 4100,
+          "claim_date": "2026-06-05",
+          "receipt_attached": false,
+          "receipt_date": null,
+          "submitted_date": "2026-06-20"
+        },
+        "result": {
+          "receipt_required": true,
+          "receipt_attached": false,
+          "date_mismatch": false,
+          "late_submission": false,
+          "issues": [
+            "Receipt required but not attached"
+          ],
+          "passed": false
+        }
+      },
+      {
+        "tool": "duplicate_detector",
+        "args": {
+          "amount": 4100,
+          "date": "2026-06-05",
+          "employee_id": "EMP-077",
+          "vendor": "City Stay Inn",
+          "claim_id": "CLM-1003"
+        },
+        "result": {
+          "is_likely_duplicate": false,
+          "matched_claims": [],
+          "checked_against_history_size": 3
+        }
+      }
+    ]
+  },
+  {
+    "claim": {
+      "claim_id": "CLM-1004",
+      "employee_id": "EMP-204",
+      "employee_name": "A. Sharma",
+      "category": "Flight",
+      "city": "Bengaluru",
+      "date": "2026-06-18",
+      "amount": 27500,
+      "vendor": "IndiGo Airlines",
+      "description": "Round trip flight for client workshop, business class upgrade",
+      "receipt_attached": true,
+      "receipt_date": "2026-06-18",
+      "submitted_date": "2026-06-19"
+    },
+    "decision": {
+      "claim_id": "CLM-1004",
+      "decision": "Manual Review",
+      "approved_amount": 25000.0,
+      "deducted_amount": 2500.0,
+      "missing_documents": [],
+      "policy_reference": "Section 4: Flight & Transportation",
+      "confidence": 0.9,
+      "explanation": "The claim is partially approved due to the excess amount above the city limit for flights. The business class upgrade requires VP-level sign-off, which is not provided in the claim. The receipt is attached and the submission is on time. [System override \u2192 Manual Review: Amount \u20b927500 exceeds global manual-review threshold of \u20b925000]",
+      "tools_used": [
+        "policy_lookup",
+        "limit_checker",
+        "receipt_validator",
+        "duplicate_detector"
+      ]
+    },
+    "audit_trail": [
+      {
+        "tool": "policy_lookup",
+        "args": {
+          "query": "Flight"
+        },
+        "result": {
+          "query": "Flight",
+          "matched_sections": [
+            "Section 4: Flight & Transportation",
+            "Section 3: Lodging / Hotel"
+          ],
+          "context": "## Section 4: Flight & Transportation\n4.1 Economy class is the default for trips under 6 hours; Premium Economy is allowed for flights over 6 hours with manager pre-approval.\n4.2 Business class requires VP-level sign-off and is otherwise Rejected.\n4.3 Local transportation (cabs, ride-hailing) is reimbursable up to a daily cap; amounts above the cap require a trip log and are otherwise Partially Approved.\n\n## Section 3: Lodging / Hotel\n3.1 Hotel stays must not exceed the nightly cap for the relevant city tier.\n3.2 Only standard/business category rooms are covered. Suite or premium upgrades require Manual Review with written justification.\n3.3 Lodging claims without an itemized hotel invoice are Rejected unless the amount is under \u20b91,500, in which case Manual Review may apply."
+        }
+      },
+      {
+        "tool": "limit_checker",
+        "args": {
+          "amount": 27500,
+          "category": "Flight",
+          "city": "Bengaluru"
+        },
+        "result": {
+          "category": "Flight",
+          "city": "Bengaluru",
+          "city_tier": "Tier1",
+          "limit": 25000,
+          "claimed_amount": 27500,
+          "within_limit": false,
+          "excess_amount": 2500,
+          "global_manual_review_threshold": 25000,
+          "exceeds_global_manual_review_threshold": true
+        }
+      },
+      {
+        "tool": "receipt_validator",
+        "args": {
+          "amount": 27500,
+          "claim_date": "2026-06-18",
+          "receipt_attached": true,
+          "receipt_date": "2026-06-18",
+          "submitted_date": "2026-06-19"
+        },
+        "result": {
+          "receipt_required": true,
+          "receipt_attached": true,
+          "date_mismatch": false,
+          "late_submission": false,
+          "issues": [],
+          "passed": true
+        }
+      },
+      {
+        "tool": "duplicate_detector",
+        "args": {
+          "amount": 27500,
+          "date": "2026-06-18",
+          "employee_id": "EMP-204",
+          "vendor": "IndiGo Airlines",
+          "claim_id": "CLM-1004"
+        },
+        "result": {
+          "is_likely_duplicate": false,
+          "matched_claims": [],
+          "checked_against_history_size": 3
+        }
+      }
+    ]
+  },
+  {
+    "claim": {
+      "claim_id": "CLM-1005",
+      "employee_id": "EMP-118",
+      "employee_name": "R. Iyer",
+      "category": "Meals",
+      "city": "Pune",
+      "date": "2026-06-10",
+      "amount": 2580,
+      "vendor": "Hotel Grand Court Restaurant",
+      "description": "Dinner during conference (resubmission with corrected amount)",
+      "receipt_attached": true,
+      "receipt_date": "2026-06-10",
+      "submitted_date": "2026-06-22"
+    },
+    "decision": {
+      "claim_id": "CLM-1005",
+      "decision": "Manual Review",
+      "approved_amount": 0.0,
+      "deducted_amount": 0.0,
+      "missing_documents": [],
+      "policy_reference": "Section 2: Per Diem & Meal Allowance, Section 1: General Eligibility",
+      "confidence": 0.7,
+      "explanation": "The claim is a likely duplicate of a previously submitted claim and exceeds the per-diem limit for meals in Pune. The receipt is attached and the submission is within the time limit, but due to the potential duplication and excess amount, the claim requires manual review.",
+      "tools_used": [
+        "policy_lookup",
+        "limit_checker",
+        "receipt_validator",
+        "duplicate_detector"
+      ]
+    },
+    "audit_trail": [
+      {
+        "tool": "policy_lookup",
+        "args": {
+          "query": "Meals"
+        },
+        "result": {
+          "query": "Meals",
+          "matched_sections": [
+            "Section 2: Per Diem & Meal Allowance",
+            "Section 1: General Eligibility"
+          ],
+          "context": "## Section 2: Per Diem & Meal Allowance\n2.1 Meal per-diem limits by city tier (see limits.json for exact values):\n    - Tier 1 (Metro: Mumbai, Bengaluru, Delhi, Pune): higher allowance\n    - Tier 2 (other state capitals): medium allowance\n    - Tier 3 (other cities): lower allowance\n2.2 Alcohol is never reimbursable under meal per-diem, regardless of city tier.\n2.3 Amounts exceeding the per-diem limit are Partially Approved \u2014 the excess is deducted, not auto-rejected, unless receipts are also missing.\n\n## Section 1: General Eligibility\n1.1 Reimbursement applies only to pre-approved business travel (client visits, conferences, training, inter-office travel).\n1.2 Personal travel, leisure add-ons, or travel for dependents is never reimbursable.\n1.3 Claims must be submitted within 30 days of the expense date. Claims submitted later are routed to Manual Review."
+        }
+      },
+      {
+        "tool": "limit_checker",
+        "args": {
+          "amount": 2580,
+          "category": "Meals",
+          "city": "Pune"
+        },
+        "result": {
+          "category": "Meals",
+          "city": "Pune",
+          "city_tier": "Tier1",
+          "limit": 1800,
+          "claimed_amount": 2580,
+          "within_limit": false,
+          "excess_amount": 780,
+          "global_manual_review_threshold": 25000,
+          "exceeds_global_manual_review_threshold": false
+        }
+      },
+      {
+        "tool": "receipt_validator",
+        "args": {
+          "amount": 2580,
+          "claim_date": "2026-06-10",
+          "receipt_attached": true,
+          "receipt_date": "2026-06-10",
+          "submitted_date": "2026-06-22"
+        },
+        "result": {
+          "receipt_required": true,
+          "receipt_attached": true,
+          "date_mismatch": false,
+          "late_submission": false,
+          "issues": [],
+          "passed": true
+        }
+      },
+      {
+        "tool": "duplicate_detector",
+        "args": {
+          "amount": 2580,
+          "date": "2026-06-10",
+          "employee_id": "EMP-118",
+          "vendor": "Hotel Grand Court Restaurant",
+          "claim_id": "CLM-1005"
+        },
+        "result": {
+          "is_likely_duplicate": true,
+          "matched_claims": [
+            "CLM-1002"
+          ],
+          "checked_against_history_size": 3
+        }
+      }
+    ]
+  }
+]

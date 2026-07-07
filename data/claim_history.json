@@ -1,0 +1,32 @@
+[
+  {
+    "claim_id": "CLM-0991",
+    "employee_id": "EMP-204",
+    "category": "Meals",
+    "city": "Pune",
+    "date": "2026-05-02",
+    "amount": 950,
+    "vendor": "Cafe Noir",
+    "status": "Approved"
+  },
+  {
+    "claim_id": "CLM-0995",
+    "employee_id": "EMP-077",
+    "category": "LocalTransport",
+    "city": "Nashik",
+    "date": "2026-05-20",
+    "amount": 400,
+    "vendor": "Ola Cabs",
+    "status": "Approved"
+  },
+  {
+    "claim_id": "CLM-1002",
+    "employee_id": "EMP-118",
+    "category": "Meals",
+    "city": "Pune",
+    "date": "2026-06-10",
+    "amount": 2600,
+    "vendor": "Hotel Grand Court Restaurant",
+    "status": "Approved"
+  }
+]

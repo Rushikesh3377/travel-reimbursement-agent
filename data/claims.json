@@ -1,0 +1,72 @@
+[
+  {
+    "claim_id": "CLM-1001",
+    "employee_id": "EMP-204",
+    "employee_name": "A. Sharma",
+    "category": "Meals",
+    "city": "Pune",
+    "date": "2026-06-12",
+    "amount": 1500,
+    "vendor": "The Spice Route Restaurant",
+    "description": "Dinner with client during Pune site visit",
+    "receipt_attached": true,
+    "receipt_date": "2026-06-12",
+    "submitted_date": "2026-06-15"
+  },
+  {
+    "claim_id": "CLM-1002",
+    "employee_id": "EMP-118",
+    "employee_name": "R. Iyer",
+    "category": "Meals",
+    "city": "Pune",
+    "date": "2026-06-10",
+    "amount": 2600,
+    "vendor": "Hotel Grand Court Restaurant",
+    "description": "Team dinner including drinks during conference",
+    "receipt_attached": true,
+    "receipt_date": "2026-06-10",
+    "submitted_date": "2026-06-11"
+  },
+  {
+    "claim_id": "CLM-1003",
+    "employee_id": "EMP-077",
+    "employee_name": "K. Verma",
+    "category": "Lodging",
+    "city": "Nashik",
+    "date": "2026-06-05",
+    "amount": 4100,
+    "vendor": "City Stay Inn",
+    "description": "One night stay for vendor meeting",
+    "receipt_attached": false,
+    "receipt_date": null,
+    "submitted_date": "2026-06-20"
+  },
+  {
+    "claim_id": "CLM-1004",
+    "employee_id": "EMP-204",
+    "employee_name": "A. Sharma",
+    "category": "Flight",
+    "city": "Bengaluru",
+    "date": "2026-06-18",
+    "amount": 27500,
+    "vendor": "IndiGo Airlines",
+    "description": "Round trip flight for client workshop, business class upgrade",
+    "receipt_attached": true,
+    "receipt_date": "2026-06-18",
+    "submitted_date": "2026-06-19"
+  },
+  {
+    "claim_id": "CLM-1005",
+    "employee_id": "EMP-118",
+    "employee_name": "R. Iyer",
+    "category": "Meals",
+    "city": "Pune",
+    "date": "2026-06-10",
+    "amount": 2580,
+    "vendor": "Hotel Grand Court Restaurant",
+    "description": "Dinner during conference (resubmission with corrected amount)",
+    "receipt_attached": true,
+    "receipt_date": "2026-06-10",
+    "submitted_date": "2026-06-22"
+  }
+]
